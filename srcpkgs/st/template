@@ -1,18 +1,21 @@
 # Template file for 'st'
 pkgname=st
-version=0.8.2
+version=0.8.2.git
 revision=1
 build_style=gnu-makefile
 make_use_env=compliant
 hostmakedepends="pkg-config"
-makedepends="fontconfig-devel libX11-devel libXft-devel"
+makedepends="fontconfig-devel libX11-devel libXft-devel git"
 depends="ncurses st-terminfo-${version}_${revision}"
 short_desc="Simple terminal implementation for X"
 maintainer='Juan RP <xtraeme@voidlinux.org>'
 license="MIT"
 homepage="https://st.suckless.org"
-distfiles="https://dl.suckless.org/${pkgname}/${pkgname}-${version}.tar.gz"
-checksum=aeb74e10aa11ed364e1bcc635a81a523119093e63befd2f231f8b0705b15bf35
+patch_args="-Np1"
+
+do_fetch(){
+  git clone https://git.suckless.org/st ${wrksrc}
+}
 
 pre_build() {
 	sed -i 's|Liberation Mono|Monospace|g' config.def.h
