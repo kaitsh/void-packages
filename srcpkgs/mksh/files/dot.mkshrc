@@ -1,0 +1,35 @@
+if [[ -z $SSH_TTY ]] && [[ -z $DISPLAY ]]; then
+	setleds -D +num
+fi
+
+# history
+export HISTSIZE=4096
+export HISTFILE=~/.mksh_hist
+
+if (( USER_ID )); then PS1=$'\e[1;37m\$'; else PS1=$'\e[1;31m\#'; fi
+
+PS1=$'\e[1;32m[$(local WD=${PWD/%$HOME/"~"}; if (( ${#WD} > 25 )); then print \…${WD: -25: -1}; else print $WD; fi)$(local GIT=$(git branch 2>/dev/null | grep "\*" | tr -d "\* "); if (( ${#GIT} > 0 )); then print "\e[1;30m@\e[1;37m$GIT"; fi)\e[1;32m]\n$(local STATUS=$?; if [[ $STATUS -ne "0" ]]; then print "\e[1;31m$STATUS "; fi)'"$PS1"$'\e[0m '
+
+# colorful man pages
+export LESS_TERMCAP_mb=$'\e[1;31m'     # begin bold
+export LESS_TERMCAP_md=$'\e[1;32m'     # begin blink
+export LESS_TERMCAP_me=$'\e[0m'        # reset bold/blink
+export LESS_TERMCAP_so=$'\e[01;35m'    # begin reverse video
+export LESS_TERMCAP_se=$'\e[0m'        # reset reverse video
+export LESS_TERMCAP_us=$'\e[4;33m'     # begin underline
+export LESS_TERMCAP_ue=$'\e[0m'        # reset underline
+
+# use separate file for alias
+if [[ -f $HOME/.mksh_alias ]]; then
+    source $HOME/.mksh_alias
+fi
+
+alias ls='ls --color=auto'
+alias grep='grep --colour=auto'
+alias egrep='egrep --colour=auto'
+alias fgrep='fgrep --colour=auto'
+
+# use separate file for env
+if [[ -f $HOME/.mksh_env ]]; then
+    source $HOME/.mksh_env
+fi
