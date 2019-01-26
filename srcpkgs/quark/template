@@ -1,0 +1,27 @@
+# Template file for 'quark'
+pkgname=quark
+version=1.0.git
+revision=1
+build_style=gnu-makefile
+make_use_env=compliant
+hostmakedepends="pkg-config"
+makedepends="git "
+short_desc="quark web server"
+maintainer="kaitsh <kaitsh@d-git.de>"
+license="ISC"
+homepage="https://tools.suckless.org/quark"
+
+do_fetch() {
+	git clone https://git.suckless.org/quark ${wrksrc}
+}
+
+do_build() {
+        [ -e ${FILESDIR}/config.h ] && cp ${FILESDIR}/config.h config.h
+	sed -i "/CFLAGS/s|\${CPPFLAGS}|& $CFLAGS|g" config.mk
+	sed -i "/LDFLAGS/s|\-s|$LDFLAGS|g" config.mk
+	make CC=$CC ${makejobs}
+}
+
+post_install() {
+	vlicense LICENSE
+}
