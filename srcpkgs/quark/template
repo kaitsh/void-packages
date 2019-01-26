@@ -4,6 +4,7 @@ version=1.0.git
 revision=1
 build_style=gnu-makefile
 make_use_env=compliant
+hostmakedepends="pkg-config"
 makedepends="git "
 short_desc="quark web server"
 maintainer="kaitsh <kaitsh@d-git.de>"
