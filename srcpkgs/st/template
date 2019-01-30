@@ -1,6 +1,6 @@
 # Template file for 'st'
 pkgname=st
-version=0.8.2.git
+version=20190130.git
 revision=1
 build_style=gnu-makefile
 make_use_env=compliant
