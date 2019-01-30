@@ -19,11 +19,7 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-<<<<<<< HEAD
 static const char *fonts[]          = {"Source Code Pro:style=Regular:size=9", "SauceCodePro NF:style=Regular:size=14"};
-=======
-static const char *fonts[]          = {"Source Code Pro:style=Regular:size=9", "SauceCodePro NF:style=Regular:size=11"};
->>>>>>> 2540706002... dwm: add icons to statusbar
 static const char dmenufont[]       = "Source Code Pro:style=Regular:size=9";
 static const char col_gray1[]       = "#1c2023";
 static const char col_gray2[]       = "#747c84";
@@ -47,11 +43,7 @@ static const Rule rules[] = {
 	/* class                       instance    title       tags mask     isfloating   monitor */
 	{ "Firefox",                   NULL,       NULL,       1 << 2,       1,           -1 },
 	{ "Thunderbird",               NULL,       NULL,       1 << 4,       1,           -1 },
-<<<<<<< HEAD
 	{ "Emacs",                     NULL,       NULL,       1 << 1,       0,           -1 },
-=======
-	{ "Emacs",                     NULL,       NULL,       1 << 1,       1,           -1 },
->>>>>>> 2540706002... dwm: add icons to statusbar
 };
 
 /* layout(s) */
