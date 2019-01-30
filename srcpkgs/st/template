@@ -1,12 +1,7 @@
 # Template file for 'st'
 pkgname=st
-<<<<<<< HEAD
 version=20190130.git
 revision=3
-=======
-version=0.8.1.git
-revision=1
->>>>>>> f08414a84c... st: add patches and colortheme
 build_style=gnu-makefile
 make_use_env=compliant
 hostmakedepends="pkg-config"
