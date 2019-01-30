@@ -5,7 +5,7 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = {"Source Code Pro:style=Regular:size=9", "SauceCodePro NF:style=Regular:size=11"};
+static const char *fonts[]          = {"Source Code Pro:style=Regular:size=9", "SauceCodePro NF:style=Regular:size=14"};
 static const char dmenufont[]       = "Source Code Pro:style=Regular:size=9";
 static const char col_gray1[]       = "#1c2023";
 static const char col_gray2[]       = "#747c84";
@@ -14,7 +14,7 @@ static const char col_gray4[]       = "#f3f4f5";
 static const char col_cyan[]        = "#95aec7";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
+	[SchemeNorm] = { col_gray3, col_gray1, col_gray1 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 
