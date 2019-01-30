@@ -5,13 +5,13 @@ static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
-static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
-static const char col_gray3[]       = "#bbbbbb";
-static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
+static const char *fonts[]          = {"Source Code Pro:style=Regular:size=9", "SauceCodePro NF:style=Regular:size=11"};
+static const char dmenufont[]       = "Source Code Pro:style=Regular:size=9";
+static const char col_gray1[]       = "#1c2023";
+static const char col_gray2[]       = "#747c84";
+static const char col_gray3[]       = "#c7ccd1";
+static const char col_gray4[]       = "#f3f4f5";
+static const char col_cyan[]        = "#95aec7";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -19,7 +19,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "\ue7a2", "\ue796", "\uf269", "\uf1de", "\uf6ed", "\uf8b2", "\uf8b5", "\uf8b8", "\uf8bb" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -27,9 +27,9 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class                       instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",                      NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox Developer Edition", NULL,       NULL,       1 << 2,       1,           -1 },
+	{ "Firefox",                   NULL,       NULL,       1 << 2,       1,           -1 },
 	{ "Thunderbird",               NULL,       NULL,       1 << 4,       1,           -1 },
+	{ "Emacs",                     NULL,       NULL,       1 << 1,       1,           -1 },
 };
 
 /* layout(s) */
