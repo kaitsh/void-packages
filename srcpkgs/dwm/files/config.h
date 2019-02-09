@@ -1,5 +1,20 @@
 /* See LICENSE file for copyright and license details. */
 
+/* extra keys */
+#include <X11/XF86keysym.h>
+
+/* commands */
+static const char *upvol[] = { "amixer", "set", "Master", "2+", NULL };
+static const char *downvol[] = { "amixer", "set", "Master", "2-", NULL };
+
+// for muting/unmuting //
+static const char *mute[] = { "amixer", "-q", "set", "Master", "toggle", NULL };
+
+// brightness //
+static const char *upbright[] = { "xbacklight", "-inc", "2", NULL NULL };
+static const char *downbright[] = { "xbacklight", "-dec", "2", NULL, NULL };
+
+
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -29,7 +44,7 @@ static const Rule rules[] = {
 	/* class                       instance    title       tags mask     isfloating   monitor */
 	{ "Firefox",                   NULL,       NULL,       1 << 2,       1,           -1 },
 	{ "Thunderbird",               NULL,       NULL,       1 << 4,       1,           -1 },
-	{ "Emacs",                     NULL,       NULL,       1 << 1,       1,           -1 },
+	{ "Emacs",                     NULL,       NULL,       1 << 1,       0,           -1 },
 };
 
 /* layout(s) */
@@ -65,6 +80,11 @@ static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
+	{ 0,             XF86XK_MonBrightnessUp,   spawn,          {.v = upbright } },
+	{ 0,             XF86XK_MonBrightnessDown, spawn,          {.v = downbright } },
+	{ 0,             XF86XK_AudioRaiseVolume,  spawn,          {.v = upvol } },
+        { 0,             XF86XK_AudioLowerVolume,  spawn,          {.v = downvol } },
+        { 0,             XF86XK_AudioMute,         spawn,          {.v = mute } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_minus,  togglescratch,  {.v = scratchpadcmd } },
