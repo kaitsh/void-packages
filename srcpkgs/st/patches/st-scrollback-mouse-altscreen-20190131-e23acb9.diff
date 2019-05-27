@@ -1,5 +1,5 @@
 diff --git a/config.def.h b/config.def.h
-index f770d2e..19d35a7 100644
+index a6d2fb9..16830c8 100644
 --- a/config.def.h
 +++ b/config.def.h
 @@ -162,8 +162,8 @@ static MouseShortcut mshortcuts[] = {
@@ -14,51 +14,35 @@ index f770d2e..19d35a7 100644
  
  /* Internal keyboard shortcuts. */
 diff --git a/st.c b/st.c
-index 218ae73..3f385a0 100644
+index 218ae73..f543305 100644
 --- a/st.c
 +++ b/st.c
-@@ -47,17 +47,6 @@
- 				term.scr + HISTSIZE + 1) % HISTSIZE] : \
- 				term.line[(y) - term.scr])
+@@ -1058,6 +1058,11 @@ tnew(int col, int row)
+ 	treset();
+ }
  
--enum term_mode {
--	MODE_WRAP        = 1 << 0,
--	MODE_INSERT      = 1 << 1,
--	MODE_ALTSCREEN   = 1 << 2,
--	MODE_CRLF        = 1 << 3,
--	MODE_ECHO        = 1 << 4,
--	MODE_PRINT       = 1 << 5,
--	MODE_UTF8        = 1 << 6,
--	MODE_SIXEL       = 1 << 7,
--};
--
- enum cursor_movement {
- 	CURSOR_SAVE,
- 	CURSOR_LOAD
++int tisaltscr(void)
++{
++	return IS_SET(MODE_ALTSCREEN);
++}
++
+ void
+ tswapscreen(void)
+ {
 diff --git a/st.h b/st.h
-index 3592957..1469450 100644
+index 3592957..23f4ca3 100644
 --- a/st.h
 +++ b/st.h
-@@ -20,6 +20,17 @@
- #define TRUECOLOR(r,g,b)	(1 << 24 | (r) << 16 | (g) << 8 | (b))
- #define IS_TRUECOL(x)		(1 << 24 & (x))
+@@ -95,6 +95,7 @@ void sendbreak(const Arg *);
+ void toggleprinter(const Arg *);
  
-+enum term_mode {
-+	MODE_WRAP        = 1 << 0,
-+	MODE_INSERT      = 1 << 1,
-+	MODE_ALTSCREEN   = 1 << 2,
-+	MODE_CRLF        = 1 << 3,
-+	MODE_ECHO        = 1 << 4,
-+	MODE_PRINT       = 1 << 5,
-+	MODE_UTF8        = 1 << 6,
-+	MODE_SIXEL       = 1 << 7,
-+};
-+
- enum glyph_attribute {
- 	ATTR_NULL       = 0,
- 	ATTR_BOLD       = 1 << 0,
+ int tattrset(int);
++int tisaltscr(void);
+ void tnew(int, int);
+ void tresize(int, int);
+ void tsetdirtattr(int);
 diff --git a/x.c b/x.c
-index e9fd6e9..c914a0b 100644
+index e9fd6e9..2dc315e 100644
 --- a/x.c
 +++ b/x.c
 @@ -417,11 +417,13 @@ bpress(XEvent *e)
@@ -70,7 +54,7 @@ index e9fd6e9..c914a0b 100644
 -				&& match(ms->mask, e->xbutton.state)) {
 -			ttywrite(ms->s, strlen(ms->s), 1);
 -			return;
-+	if (IS_SET(MODE_ALTSCREEN)) {
++	if (tisaltscr()) {
 +		for (ms = mshortcuts; ms < mshortcuts + LEN(mshortcuts); ms++) {
 +			if (e->xbutton.button == ms->b
 +					&& match(ms->mask, e->xbutton.state)) {
