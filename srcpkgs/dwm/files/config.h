@@ -4,14 +4,16 @@
 #include <X11/XF86keysym.h>
 
 /* commands */
-static const char *upvol[] = { "amixer", "set", "Master", "2+", NULL };
-static const char *downvol[] = { "amixer", "set", "Master", "2-", NULL };
+static const char *upvol[] = { "pactl", "set-sink-volume", "0", "+3%", NULL };
+static const char *downvol[] = { "pactl", "set-sink-volume", "0", "-3%", NULL };
 
 // for muting/unmuting //
-static const char *mute[] = { "amixer", "-q", "set", "Master", "toggle", NULL };
+static const char *mute[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
+static const char *micmute[] = { "pactl", "set-sink-mute", "1", "toggle", NULL };
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int gappx     = 2;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -46,7 +48,6 @@ static const Rule rules[] = {
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
-static const unsigned int gappx     = 2;        /* gap pixel between windows */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -76,8 +77,9 @@ static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ 0,             XF86XK_AudioRaiseVolume,  spawn,          {.v = upvol } },
-  { 0,             XF86XK_AudioLowerVolume,  spawn,          {.v = downvol } },
-  { 0,             XF86XK_AudioMute,         spawn,          {.v = mute } },
+        { 0,             XF86XK_AudioLowerVolume,  spawn,          {.v = downvol } },
+        { 0,             XF86XK_AudioMute,         spawn,          {.v = mute } },
+        { 0,             XF86XK_AudioMicMute,      spawn,          {.v = micmute } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_minus,  togglescratch,  {.v = scratchpadcmd } },
