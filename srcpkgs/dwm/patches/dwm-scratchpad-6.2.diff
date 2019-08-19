@@ -7,7 +7,7 @@ diff -up a/config.def.h b/config.def.h
  static const char *termcmd[]  = { "st", NULL };
 +static const char scratchpadname[] = "scratchpad";
 +static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
- 
+
  static Key keys[] = {
  	/* modifier                     key        function        argument */
  	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -30,16 +30,16 @@ diff -up a/dwm.c b/dwm.c
 @@ -273,6 +274,8 @@ static Window root, wmcheckwin;
  /* configuration, allows nested code to access above variables */
  #include "config.h"
- 
+
 +static unsigned int scratchtag = 1 << LENGTH(tags);
 +
  /* compile-time check if all tags fit into an unsigned int bit array. */
  struct NumTags { char limitexceeded[LENGTH(tags) > 31 ? -1 : 1]; };
- 
+
 @@ -1052,6 +1055,14 @@ manage(Window w, XWindowAttributes *wa)
  		&& (c->x + (c->w / 2) < c->mon->wx + c->mon->ww)) ? bh : c->mon->my);
  	c->bw = borderpx;
- 
+
 +	selmon->tagset[selmon->seltags] &= ~scratchtag;
 +	if (!strcmp(c->name, scratchpadname)) {
 +		c->mon->tagset[c->mon->seltags] |= c->tags = scratchtag;
@@ -61,7 +61,7 @@ diff -up a/dwm.c b/dwm.c
  			close(ConnectionNumber(dpy));
 @@ -1748,6 +1760,28 @@ togglefloating(const Arg *arg)
  }
- 
+
  void
 +togglescratch(const Arg *arg)
 +{
