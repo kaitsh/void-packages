@@ -39,9 +39,10 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class                       instance    title       tags mask     isfloating   monitor */
-	{ "Firefox",                   NULL,       NULL,       1 << 2,       0,           -1 },
-	{ "Thunderbird",               NULL,       NULL,       1 << 4,       0,           -1 },
-	{ "Emacs",                     NULL,       NULL,       1 << 1,       0,           -1 },
+	{ "Firefox",                   NULL,       NULL,       1 << 2,       0,            -1 },
+	{ "Thunderbird",            NULL,       NULL,       1 << 4,       0,         -1 },
+	{ "Emacs",                    NULL,       NULL,       1 << 1,       0,           -1 },
+    { "4coder",                   NULL,        NULL,       1 << 1,      0,            -1 },
 };
 
 /* layout(s) */
@@ -59,10 +60,10 @@ static const Layout layouts[] = {
 /* key definitions */
 #define MODKEY Mod4Mask
 #define TAGKEYS(KEY,TAG) \
-	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
-	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
-	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
+{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
+{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
+{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
+{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
@@ -77,9 +78,9 @@ static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ 0,             XF86XK_AudioRaiseVolume,  spawn,          {.v = upvol } },
-        { 0,             XF86XK_AudioLowerVolume,  spawn,          {.v = downvol } },
-        { 0,             XF86XK_AudioMute,         spawn,          {.v = mute } },
-        { 0,             XF86XK_AudioMicMute,      spawn,          {.v = micmute } },
+    { 0,             XF86XK_AudioLowerVolume,  spawn,          {.v = downvol } },
+    { 0,             XF86XK_AudioMute,         spawn,          {.v = mute } },
+    { 0,             XF86XK_AudioMicMute,      spawn,          {.v = micmute } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_minus,  togglescratch,  {.v = scratchpadcmd } },
@@ -105,14 +106,14 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	TAGKEYS(                        XK_1,                      0)
-	TAGKEYS(                        XK_2,                      1)
-	TAGKEYS(                        XK_3,                      2)
-	TAGKEYS(                        XK_4,                      3)
-	TAGKEYS(                        XK_5,                      4)
-	TAGKEYS(                        XK_6,                      5)
-	TAGKEYS(                        XK_7,                      6)
-	TAGKEYS(                        XK_8,                      7)
-	TAGKEYS(                        XK_9,                      8)
+        TAGKEYS(                        XK_2,                      1)
+        TAGKEYS(                        XK_3,                      2)
+        TAGKEYS(                        XK_4,                      3)
+        TAGKEYS(                        XK_5,                      4)
+        TAGKEYS(                        XK_6,                      5)
+        TAGKEYS(                        XK_7,                      6)
+        TAGKEYS(                        XK_8,                      7)
+        TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_e,      quit,           {0} },
 };
 
